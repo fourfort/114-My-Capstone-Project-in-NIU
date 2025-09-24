@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Duck Egg Grading and Size Monitoring System</title>
+  <style>
+    body {
+      font-family: "Times New Roman", serif;
+      margin: 0;
+      padding: 0;
+      background: url('https://respic.3d66.com/coverimg/cache/36e2/baa0b8cb0dcfa2053e8687d567531185.jpg!medium-size-2?v=18485955&k=D41D8CD98F00B204E9800998ECF8427E') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.9);
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #005f73;
+      font-size: 70px;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      width: 100px;
+      margin-bottom: 15px;
+    }
+
+    .section-container {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      max-width: 1400px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .section {
+      flex: 1;
+      margin: 15px;
+      padding: 30px;
+      background-color: #ffffffcc;
+      border-radius: 24px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      min-width: 300px;
+      max-width: 32%;
+      min-height: 250px;
+      text-align: left;
+    }
+
+    .section h2 {
+      color: #073b4c;
+      font-size: 40px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .size-info {
+      font-size: 30px;
+      line-height: 2.2;
+    }
+
+    .size-info span {
+      font-weight: bold;
+    }
+
+    button {
+      padding: 14px 30px;
+      font-size: 30px;
+      margin-top: 30px;
+      cursor: pointer;
+      background-color: #ffb703;
+      color: #000;
+      border: none;
+      border-radius: 14px;
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #f77f00;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyU4CF6dk33q_v5t2u7N8MiBrZUbGRARyBaA&s" alt="Yellow Duck" class="logo">
+    <h1>Duck Egg Quality Monitoring System</h1>
+
+    <div class="section-container">
+      <div class="section">
+        <h2>B-1 (Lower Grade 1)</h2>
+        <div class="size-info">
+          <div>Large (L) Count: <span id="B1_L">0</span></div>
+          <div>Medium (M) Count: <span id="B1_M">0</span></div>
+          <div>Small (S) Count: <span id="B1_S">0</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>A (Good Quality)</h2>
+        <div class="size-info">
+          <div>Large (L) Count: <span id="A_L">0</span></div>
+          <div>Medium (M) Count: <span id="A_M">0</span></div>
+          <div>Small (S) Count: <span id="A_S">0</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>B-2 (Lower Grade 2)</h2>
+        <div class="size-info">
+          <div>Large (L) Count: <span id="B2_L">0</span></div>
+          <div>Medium (M) Count: <span id="B2_M">0</span></div>
+          <div>Small (S) Count: <span id="B2_S">0</span></div>
+        </div>
+      </div>
+    </div>
+
+    <a href="https://pixhost.to/show/5449/594366283_qr-ioi-tw.png">
+      <img src="https://t1.pixhost.to/thumbs/5449/594366283_qr-ioi-tw.png" alt="QR Code" style="width: 150px; margin-top: 40px;" />
+    </a>
+    <button onclick="updateData()">Manual Update</button>
+  </div>
+
+  <script>
+    function updateData() {
+      fetch("http://localhost:5000/data")
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("A_L").textContent = data.A_L;
+          document.getElementById("A_M").textContent = data.A_M;
+          document.getElementById("A_S").textContent = data.A_S;
+          document.getElementById("B1_L").textContent = data.B1_L;
+          document.getElementById("B1_M").textContent = data.B1_M;
+          document.getElementById("B1_S").textContent = data.B1_S;
+          document.getElementById("B2_L").textContent = data.B2_L;
+          document.getElementById("B2_M").textContent = data.B2_M;
+          document.getElementById("B2_S").textContent = data.B2_S;
+        })
+        .catch(err => {
+          console.error("Error:", err);
+        });
+    }
+
+    setInterval(updateData, 10000);
+    window.onload = updateData;
+  </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>鴨蛋分級與大小監控系統</title>
+  <style>
+    body {
+      font-family: "微軟正黑體", sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: url('https://owlting-blog-media.s3.ap-northeast-1.amazonaws.com/wp-content/uploads/2019/11/20105454/770974369-1240x826.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 30px 20px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #005f73;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      width: 80px;
+      margin-bottom: 10px;
+    }
+
+    .section {
+      margin: 20px auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 500px;
+      background-color: #ffffffcc;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      color: #073b4c;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .data-table {
+      width: 100%;
+      font-size: 18px;
+      border-collapse: collapse;
+    }
+
+    .data-table td {
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      margin-top: 30px;
+      cursor: pointer;
+      background-color: #ffb703;
+      color: #000;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #f77f00;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <img src="https://www.shutterstock.com/shutterstock/videos/3597302221/thumb/1.jpg?ip=x480" alt="黃色小鴨" class="logo">
+    <h1>鴨蛋之監控系統畫面</h1>
+
+    <div class="section">
+      <h2>鴨蛋分級顆數</h2>
+      <table class="data-table">
+        <tr><td>A（良蛋）:</td><td id="gradeA">0</td></tr>
+        <tr><td>B-1（次蛋1）:</td><td id="gradeB1">0</td></tr>
+        <tr><td>B-2（次蛋2）:</td><td id="gradeB2">0</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>鴨蛋大小顆數</h2>
+      <table class="data-table">
+        <tr><td>L（大）:</td><td id="sizeL">0</td></tr>
+        <tr><td>M（中）:</td><td id="sizeM">0</td></tr>
+        <tr><td>S（小）:</td><td id="sizeS">0</td></tr>
+      </table>
+    </div>
+
+    <button onclick="updateData()">手動更新</button>
+  </div>
+
+  <script>
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function updateData() {
+      document.getElementById("gradeA").textContent = getRandomInt(80, 100);
+      document.getElementById("gradeB1").textContent = getRandomInt(10, 20);
+      document.getElementById("gradeB2").textContent = getRandomInt(0, 10);
+      document.getElementById("sizeL").textContent = getRandomInt(40, 60);
+      document.getElementById("sizeM").textContent = getRandomInt(30, 50);
+      document.getElementById("sizeS").textContent = getRandomInt(10, 30);
+    }
+
+    setInterval(updateData, 10000);
+    window.onload = updateData;
+  </script>
+</body>
+</html>
+
+
